@@ -116,6 +116,9 @@
             <div class="container-xl">
                 <h1 class="navbar-brand navbar-brand-autodark">Portfolio Admin</h1>
                 <div class="navbar-nav flex-row order-md-last">
+                    <button class="btn btn-success me-2" onclick="saveAll()">
+                        <i class="fa fa-save me-2"></i> Save All Changes
+                    </button>
                     <a href="index.html" class="btn btn-outline-secondary" target="_blank">View Site</a>
                 </div>
             </div>
@@ -135,8 +138,8 @@
                 <div class="card">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                            <li class="nav-item"><a href="#tabs-config" class="nav-link active"
-                                    data-bs-toggle="tab">Config</a></li>
+                            <li class="nav-item"><a href="#tabs-bio" class="nav-link active"
+                                    data-bs-toggle="tab">Bio</a></li>
                             <li class="nav-item"><a href="#tabs-gallery" class="nav-link"
                                     data-bs-toggle="tab">Gallery</a></li>
                             <li class="nav-item"><a href="#tabs-socials" class="nav-link"
@@ -147,7 +150,7 @@
                     <div class="card-body">
                         <div class="tab-content">
 
-                            <div class="tab-pane active show" id="tabs-config">
+                            <div class="tab-pane active show" id="tabs-bio">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -158,9 +161,7 @@
                                             <label class="form-label">Email</label>
                                             <input type="email" class="form-control" id="config-email">
                                         </div>
-                                        <button class="btn btn-success" onclick="saveConfig()">
-                                            <i class="fa fa-rocket me-2"></i> Apply Live (config.json)
-                                        </button>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -195,9 +196,9 @@
                                     <span class="text-muted small" id="gallery-status">
                                         Drag to reorder. Click ✕ to delete.
                                     </span>
-                                    <button class="btn btn-success" onclick="saveGallery()">
-                                        <i class="fa fa-rocket me-2"></i> Apply Live (artworks.json)
-                                    </button>
+                                    <span class="text-muted small" id="gallery-status">
+                                        Drag to reorder. Click ✕ to delete.
+                                    </span>
                                 </div>
 
                                 <ul id="gallery-list" class="sortable-list"></ul>
@@ -240,9 +241,8 @@
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="text-muted small">Drag to reorder.</span>
-                                    <button class="btn btn-success" onclick="saveSocials()">
-                                        <i class="fa fa-rocket me-2"></i> Apply Live (socials.json)
-                                    </button>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-muted small">Drag to reorder.</span>
                                 </div>
 
                                 <ul id="socials-list" class="sortable-list"></ul>
@@ -291,10 +291,36 @@
             document.getElementById('config-name').value = currentConfig.name || '';
             document.getElementById('config-email').value = currentConfig.email || '';
         }
-        function saveConfig() {
-            currentConfig.name = document.getElementById('config-name').value;
-            currentConfig.email = document.getElementById('config-email').value;
-            applyLive('config.json', currentConfig);
+        
+        async function saveAll() {
+            const token = document.getElementById('github-token').value.trim();
+            if (!token) return alert("GitHub Token required!");
+
+            const btn = document.querySelector('button[onclick="saveAll()"]');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Saving...`;
+
+            try {
+                // Update local state first
+                currentConfig.name = document.getElementById('config-name').value;
+                currentConfig.email = document.getElementById('config-email').value;
+
+                // Push all
+                await Promise.all([
+                    applyLive('config.json', currentConfig, true),
+                    applyLive('artworks.json', currentArtworks, true),
+                    applyLive('socials.json', currentSocials, true)
+                ]);
+
+                alert('✅ All changes LIVE! Wait ~30s for Pages to deploy.');
+            } catch (e) {
+                alert(`❌ Error: ${e.message}`);
+                console.error(e);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
         }
 
         // --- Gallery Logic (URL-based) ---
@@ -339,26 +365,7 @@
         }
         function removeArtwork(idx) { currentArtworks.splice(idx, 1); renderGallery(); }
 
-        async function saveGallery() {
-            const token = document.getElementById('github-token').value.trim();
-            if (!token) return alert("GitHub Token required!");
-
-            const btn = document.querySelector('button[onclick="saveGallery()"]');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Saving...`;
-
-            try {
-                await applyLive('artworks.json', currentArtworks, true);
-                alert('✅ Gallery LIVE! Changes pushed to GitHub.\nWait ~30s for Pages to deploy.');
-            } catch (e) {
-                alert(`❌ Error: ${e.message}`);
-                console.error(e);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
-        }
+        function removeArtwork(idx) { currentArtworks.splice(idx, 1); renderGallery(); }
 
         // --- Socials Logic ---
         function addSocial() {
@@ -400,7 +407,6 @@
             });
         }
         function removeSocial(idx) { currentSocials.splice(idx, 1); renderSocials(); }
-        function saveSocials() { applyLive('socials.json', currentSocials); }
 
         // --- Shared Logic ---
 
