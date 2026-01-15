@@ -3,5 +3,10 @@
         "name": "teste",
         "url": "teste.om",
         "icon": "instagram"
+    },
+    {
+        "name": "testezaum2",
+        "url": "testezaum2.com",
+        "icon": "x-twitter"
     }
 ]
