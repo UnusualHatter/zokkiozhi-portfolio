@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "name": "X (Twitter)",
+        "url": "https://x.com/Zokiozhi_Red",
+        "icon": "fa-brands fa-twitter"
+    },
+    {
+        "name": "Telegram",
+        "url": "https://t.me/ZoKioZhi",
+        "icon": "fa-brands fa-telegram"
+    }
+]

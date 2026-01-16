@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('SCRIPT STARTED - DOMContentLoaded');
     AOS.init({
         duration: 800,
         once: true,
@@ -92,14 +93,15 @@ async function loadData() {
                 const el = document.createElement('div');
                 // Default to size 1 if not specified
                 const sizeClass = art.size ? `size-${art.size}` : 'size-1';
-                el.className = `gallery-item ${sizeClass}`;
-                el.setAttribute('data-aos', 'fade-up');
-                el.setAttribute('data-aos-delay', (index * 100).toString());
+                el.className = `gallery-item ${sizeClass} fluid-reveal`;
+                el.style.animationDelay = `${index * 100}ms`;
 
                 el.innerHTML = `<img src="${art.src}" alt="${art.title || ''}" loading="lazy">`;
                 grid.appendChild(el);
             });
         }
+
+        setTimeout(() => AOS.refresh(), 100);
 
         const linksGrid = document.getElementById('links-grid');
         const linksSection = document.getElementById('links');
@@ -107,18 +109,16 @@ async function loadData() {
         linksGrid.innerHTML = '';
 
         if (socials.length > 0) {
-            linksSection.classList.remove('hidden');
+            // linksSection.classList.remove('hidden'); // Removed hidden logic as requested
             socials.forEach(link => {
                 const a = document.createElement('a');
                 a.href = link.url;
                 a.target = '_blank';
-                const iconClass = link.icon ? `fa-brands fa-${link.icon}` : 'fa-solid fa-link';
+                const iconClass = link.icon ? link.icon : 'fa-solid fa-link';
                 a.innerHTML = `<i class="${iconClass}"></i>`;
                 a.title = link.name;
                 linksGrid.appendChild(a);
             });
-        } else {
-            linksSection.classList.add('hidden');
         }
 
     } catch (e) { console.error(e); }
