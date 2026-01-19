@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of ZoKioZhi, Digital Artist.">
-    <title>ZoKioZhi | Digital Artist</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="ZoKioZhi - Portfolio">
+    <title>ZoKioZhi | Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+    <link rel="stylesheet" href="style.css?v=candy2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
@@ -19,39 +20,38 @@
 
     <header class="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo" id="nav-logo">Personal Portfolio</a>
+            <a href="#" class="logo" id="nav-logo"><i class="fa-solid fa-heart"></i> ZoKioZhi</a>
 
             <button class="menu-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
 
             <nav class="nav-links">
-                <a href="#hero">Artworks</a>
+                <a href="#hero">Works</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#pricesheet">Pricesheet</a>
+                <a href="#pricesheet">Prices</a>
                 <a href="#links">Socials</a>
             </nav>
 
-            <button id="theme-toggle" aria-label="Toggle Dark Mode">☾</button>
+            <button id="theme-toggle"
+                style="background:none; border:none; font-size:1.5rem; cursor:pointer; margin-left:1rem;">☾</button>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="hero-section" data-aos="fade-up">
-            <div class="container hero-content">
-                <h1 id="hero-title">ZoKioZhi</h1>
-                <a href="#gallery" class="btn primary-btn">View Works</a>
-            </div>
+        <section id="hero" class="hero-section" data-aos="zoom-in">
+            <h1 class="hero-title" id="hero-title">ZoKioZhi</h1>
+            <img src="assets/logo.png" alt="Logo" class="hero-logo-img">
+            <a href="#gallery" class="btn">VIEW WORKS</a>
         </section>
 
         <!-- Gallery Section -->
         <section id="gallery" class="section">
-            <div class="gallery-container">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Gallery</h2>
                 <div class="gallery-grid" id="gallery-grid">
-                    <p class="empty-state">Loading works...</p>
+                    <p class="empty-state">Loading artworks...</p>
                 </div>
             </div>
         </section>
@@ -59,63 +59,58 @@
         <!-- Pricesheet Section -->
         <section id="pricesheet" class="section">
             <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Pricesheet</h2>
+                <h2 class="section-title" data-aos="fade-up">Prices</h2>
                 <div class="prices-grid">
-                    <!-- Basic 1 -->
-                    <div class="price-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="price-header">Basic 1</div>
+                    <div class="price-card" data-aos="flip-up" data-aos-delay="100">
+                        <div class="price-header">BASIC 1</div>
+                        <div class="price-icon"><i class="fa-solid fa-star"></i></div>
                         <h3 class="price-title">Half Body</h3>
-                        <div class="price-examples">
-                            <img src="https://picsum.photos/100/100?random=10" alt="Example">
-                            <img src="https://picsum.photos/100/100?random=11" alt="Example">
-                        </div>
-                        <div class="price-amount">$40,00</div>
-                        <p class="price-desc">Simple background, clean rendering</p>
+                        <div class="price-amount">R$40</div>
+                        <p class="price-desc">High quality rendering</p>
                     </div>
-                    <!-- Basic 2 -->
-                    <div class="price-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="price-header">Basic 2</div>
+
+                    <div class="price-card" data-aos="flip-up" data-aos-delay="200">
+                        <div class="price-header">BASIC 2</div>
+                        <div class="price-icon"><i class="fa-solid fa-heart"></i></div>
                         <h3 class="price-title">Full Body</h3>
-                        <div class="price-examples">
-                            <img src="https://picsum.photos/100/100?random=12" alt="Example">
-                            <img src="https://picsum.photos/100/100?random=13" alt="Example">
-                        </div>
-                        <div class="price-amount">$60,00</div>
-                        <p class="price-desc">Full character inclusive detailing</p>
+                        <div class="price-amount">R$60</div>
+                        <p class="price-desc">Complete character design</p>
                     </div>
-                    <!-- Basic 3 -->
-                    <div class="price-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="price-header">Basic 3</div>
+
+                    <div class="price-card" data-aos="flip-up" data-aos-delay="300">
+                        <div class="price-header">BASIC 3</div>
+                        <div class="price-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                         <h3 class="price-title">Icon</h3>
-                        <div class="price-examples">
-                            <img src="https://picsum.photos/100/100?random=14" alt="Example">
-                            <img src="https://picsum.photos/100/100?random=15" alt="Example">
-                        </div>
-                        <div class="price-amount">$35,00</div>
-                        <p class="price-desc">Perfect for social media profiles</p>
+                        <div class="price-amount">R$35</div>
+                        <p class="price-desc">Social media avatar</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Socials Section -->
-        <section id="links" class="section links-section">
+        <section id="links" class="section">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Socials</h2>
-                <div class="socials-grid" id="links-grid"></div>
+                <div class="socials-grid" id="links-grid">
+                    <a href="https://x.com/Zokiozhi_Red" target="_blank" class="social-link">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://t.me/ZoKioZhi" target="_blank" class="social-link">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <!-- AOS JS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>
